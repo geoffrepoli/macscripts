@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# ADOBE FLASH PLAYER SILENT INSTALLER
+# github.com/geoffrepoli
+
+# Direct download URL to flash installer dmg contains the current version number and thus changes with each new version.
+# Get current version number from XML and format to match direct download URL 
+VERSION=$(curl -s http://fpdownload2.macromedia.com/get/flashplayer/update/current/xml/version_en_mac_pl.xml | grep -e "update version" | awk -F\" '{print $2}' | sed 's/,/./')
+DOWNLOADURL="https://fpdownload.adobe.com/get/flashplayer/pdc/${VERSION}/install_flash_player_osx.dmg"
+DOWNLOADPATH="/private/tmp/adobe-flash-${VERSION}.dmg"
+
+echo "Downloading Adobe Flash Player $VERSION Installer..."
+curl -s "$DOWNLOADURL" -o "$DOWNLOADPATH"
+
+echo "Installing Adobe Flash Player..."
+# Create a temp dir to mount disk image at
+TMPMOUNT=$(mktemp -d /private/tmp/adobe-flash-tempdir.XXXX)
+# Mount disk image silently
+hdiutil attach "$DOWNLOADPATH" -mountpoint "$TMPMOUNT" -nobrowse -noverify -noautoopen 1> /dev/null
+# Get path to installer pkg within mounted disk image
+INSTALLPKG=$(find "$TMPMOUNT" -type f -maxdepth 1 -name "*Flash*.pkg")
+# install silently, redirect stderr to /dev/null to avoid jamf bug that reports the policy as failed
+# when it see the word "error" in the output, even if the error message is unrelated/minor
+installer -dumplog -pkg "$INSTALLPKG" -target / 2> /dev/null
+
+echo "Cleaning up up temporary files"
+# Unmount disk image, delete tempdir and dmg
+hdiutil detach "$TMPMOUNT" 1> /dev/null
+rm -rf "$TMPMOUNT"
+rm -rf "$DOWNLOADPATH"
+
+echo "Done"
