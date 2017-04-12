@@ -2,17 +2,16 @@
 #
 # WPA2 WIFI REMOVAL TOOL
 # github.com/geoffrepoli
-#
+# ===============
 # Removes SSID(s) from preferred network list & removes saved login credentials from each console user's keychain
 # Note: must be run as root
 
 
-# ADD WIRELESS NETWORKS TO BE REMOVED
-# add SSIDs to be removed in the following array, using the same formatting as the example networks:
+# ===============
+# SCRIPT CONFIGURATION
+# Add SSIDs to be removed in the following array, using the same formatting as the example networks:
 SSIDS=( "network1" "network2" )
-
-#############
-#############
+# ===============
 
 # Get list of all local accounts by returning list of all accounts with UID >= 499
 # while this is the most common user setup in Mac envs, tweak this to your environment's needs if necessary
