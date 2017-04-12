@@ -25,14 +25,14 @@ EN=$(/usr/sbin/networksetup -listallhardwareports | grep -A1 Wi-Fi | awk -F': ' 
 
 for SSID in ${SSIDS[@]} ; do
 
-    # looks for each ssid and removes if found
+    # Check for each ssid and remove if found
     if [[ $(/usr/sbin/networksetup -listpreferredwirelessnetworks $EN | grep "$SSID") ]] ; then
         /usr/sbin/networksetup -removepreferredwirelessnetwork $EN $SSID > /dev/null 2>&1 && echo "Removed SSID: $SSID"
     fi
 
+    # Check each local user's login keychain for the associated 802.1X password entry and remove if found
     for CUSER in ${CUSERS[@]} ; do
     
-        # Checks each local user's login keychain for the 802.1X password entry and removes if found
         if SSID="$SSID" su "$CUSER" -c '/usr/bin/security find-generic-password -s "com.apple.network.eap.user.item.wlan.ssid.$SSID" > /dev/null 2>&1' ; then 
             SSID="$SSID" su "$CUSER" -c '/usr/bin/security delete-generic-password -s "com.apple.network.eap.user.item.wlan.ssid.$SSID" > /dev/null 2>&1' && echo "Removed keychain entry: $SSID - $CUSER"
         fi
