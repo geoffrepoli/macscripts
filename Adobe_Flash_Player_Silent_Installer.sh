@@ -4,8 +4,11 @@
 # github.com/geoffrepoli
 
 # Direct download URL to flash installer dmg contains the current version number and thus changes with each new version.
-# Get current version number from XML and format to match direct download URL 
-VERSION=$(curl -s http://fpdownload2.macromedia.com/get/flashplayer/update/current/xml/version_en_mac_pl.xml | grep -e "update version" | awk -F\" '{print $2}' | sed 's/,/./')
+# Source URL to Adobe XML file that contains element with current version #
+SOURCE="http://fpdownload2.macromedia.com/get/flashplayer/update/current/xml/version_en_mac_pl.xml"
+
+# Extract current version element from XML, format for use in direct download URL
+VERSION=$(curl -s "$SOURCE" | grep -e "update version" | awk -F\" '{print $2}' | sed 's/,/./')
 DOWNLOADURL="https://fpdownload.adobe.com/get/flashplayer/pdc/${VERSION}/install_flash_player_osx.dmg"
 DOWNLOADPATH="/private/tmp/adobe-flash-${VERSION}.dmg"
 
