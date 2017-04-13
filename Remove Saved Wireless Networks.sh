@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# WPA2 WIFI REMOVAL TOOL
+# REMOVE SAVED WIRELESS NETWORKS
 # github.com/geoffrepoli
 # ===============
 # Removes SSID(s) from preferred network list & removes saved login credentials from each console user's keychain
