@@ -2,6 +2,7 @@
 #
 # ADOBE FLASH PLAYER SILENT INSTALLER
 # github.com/geoffrepoli
+# v2.1
 
 # Create UUID to safely perform `rm -f` on workstations
 UUID=$(uuidgen)
