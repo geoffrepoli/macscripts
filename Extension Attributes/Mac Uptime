@@ -27,7 +27,7 @@ convert_secs() {
 }
 
 # get last bootup timestamp
-boottime=$(sysctl -n kern.boottime | awk '{print $4}' | sed 's/,//')
+boottime=$(/usr/sbin/sysctl -n kern.boottime | awk '{print $4}' | sed 's/,//')
 
 # get current epoch time
 epoch=$(date +%s)
