@@ -11,14 +11,10 @@
 
 convert_secs() {
   local T="$1"
-  local Y=$((T/60/60/24/365))
-  local W=$((T/60/60/24/7%52))
   local D=$((T/60/60/24%7))
   local H=$((T/60/60%24))
   local M=$((T/60%60))
   local S=$((T%60))
-  [[ $Y > 0 ]] && printf '%dy ' $Y             
-  [[ $W > 0 ]] && printf '%dw ' $W
   [[ $D > 0 ]] && printf '%dd ' $D
   [[ $H > 0 ]] && printf '%dh ' $H
   [[ $M > 0 ]] && printf '%dm ' $M
@@ -31,7 +27,11 @@ boottime=$(/usr/sbin/sysctl -n kern.boottime | awk '{print $4}' | sed 's/,//')
 # get current epoch time
 epoch=$(date +%s)
 
-# convert difference from epoch - boottime into readable format
-mac_uptime=$(convert_secs "$(( $epoch - $boottime ))")
+# get difference of current time and boottime
+uptime_seconds=$(( $epoch - $boottime ))
 
+# convert seconds into readable format
+mac_uptime=$(convert_secs $uptime_seconds)
+
+# echo result as extension attribute
 echo "<result>$mac_uptime</result>"
