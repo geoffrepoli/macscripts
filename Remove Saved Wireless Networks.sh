@@ -23,8 +23,9 @@ INTERFACE=$(/usr/sbin/networksetup -listallhardwareports | grep -A1 Wi-Fi | awk 
 for SSID in "${SSIDS[@]}" ; do
 
     # Check for each ssid and remove if found
-    if /usr/sbin/networksetup -listpreferredwirelessnetworks "$INTERFACE" | grep "$SSID" &> /dev/null
-    then /usr/sbin/networksetup -removepreferredwirelessnetwork "$INTERFACE" "$SSID" &> /dev/null && echo "Removed SSID: $SSID"
+    if /usr/sbin/networksetup -listpreferredwirelessnetworks "$INTERFACE" | grep "$SSID" &> /dev/null ; then
+        /usr/sbin/networksetup -removepreferredwirelessnetwork "$INTERFACE" "$SSID" &> /dev/null && 
+        echo "Removed SSID: $SSID"
     fi
 
     # Check each local user's login keychain for the associated 802.1X password entry and remove if found
