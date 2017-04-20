@@ -1,3 +1,3 @@
 # macscripts
 
-macOS management repository
+macOS fleet management scripts repository
