@@ -1,2 +1,3 @@
-# macscriptz
-my scripty-dos
+# macscripts
+
+macOS management repository
