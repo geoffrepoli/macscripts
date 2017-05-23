@@ -101,6 +101,8 @@ __createLaunchScript() {
 	cat <<-EOT > "$SCRIPT_PATH"
 	#!/bin/bash
 	sleep 2
+	## DIRECTORY BINDING SCRIPT SHOULD GO HERE
+	## OR A JAMF POLICY -TRIGGER BIND COMMAND
 	for userHome in /Users/* ; do
 		if [[ ${userHome##*/} != Shared && ${userHome##*/} != Guest ]] ; then
 			userUID=$(/usr/bin/dscl . read /users/${userHome##*/} UniqueID | awk -F': ' '{print $NF}')
