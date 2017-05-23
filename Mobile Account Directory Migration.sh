@@ -48,7 +48,7 @@ _removeDirectoryServices() {
 	__unbindActiveDirectory
 	__removeMobileAccountPlists
 	__purgeSqlindexCache
-	shutdown -r now
+	/sbin/shutdown -r now
 }
 
 __unbindActiveDirectory() { 
