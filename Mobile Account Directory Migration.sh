@@ -61,10 +61,9 @@ __unbindActiveDirectory() {
 }
 
 __removeMobileAccountPlists() {
-	mobileAccounts=$(/usr/bin/dscl . list /users uid | awk -v num="$uidNumber" '$2>=num{print $1}')
 	while IFS= read -r account ; do
-  	rm -f var/db/dslocal/nodes/Default/users/"$account".plist
-	done <<< "$mobileAccounts"
+  		rm -f var/db/dslocal/nodes/Default/users/"$account".plist
+	done < <(/usr/bin/dscl . list /users uid | awk -v num="$uidNumber" '$2>=num{print $1}')
 }
 
 __purgeSqlindexCache() {
