@@ -108,9 +108,9 @@ __createLaunchScript() {
 	## DIRECTORY BINDING SCRIPT SHOULD GO HERE
 	## OR A JAMF POLICY -TRIGGER BIND COMMAND
 	for userHome in /Users/* ; do
-		if [[ ${userHome##*/} != Shared && ${userHome##*/} != Guest ]] ; then
-			userUID=$(/usr/bin/dscl . read /users/${userHome##*/} UniqueID | awk -F': ' '{print $NF}')
-			/usr/sbin/chown -R "$userUID" "$userHome"
+		if [[ \${userHome##*/} != Shared && \${userHome##*/} != Guest ]] ; then
+			userUID=$(/usr/bin/dscl . read /users/\${userHome##*/} UniqueID | awk -F': ' '{print $NF}')
+			/usr/sbin/chown -R \"\$userUID\" \"\$userHome\"
 		fi
 	done
 	/bin/rm -f /Library/LaunchDaemons/${LAUNCH_DAEMON}
