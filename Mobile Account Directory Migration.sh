@@ -110,7 +110,7 @@ __createLaunchScript() {
 	for userHome in /Users/* ; do
 		if [[ ${userHome##*/} != Shared && ${userHome##*/} != Guest ]] ; then
 			userUID=$(/usr/bin/dscl . read /users/${userHome##*/} UniqueID | awk -F': ' '{print $NF}')
-			chown -R "$userUID" "$userHome"
+			/usr/sbin/chown -R "$userUID" "$userHome"
 		fi
 	done
 	/bin/rm -f /Library/LaunchDaemons/${LAUNCH_DAEMON}
