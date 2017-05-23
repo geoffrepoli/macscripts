@@ -2,7 +2,7 @@
 #
 # AD-TO-OD MOBILE ACCOUNT MIGRATION
 # github.com/geoffrepoli
-# v0.0.4
+# v0.0.5
 ##################
 # Cleanly migrates cached mobile accounts from Active Directory to another 
 # directory service. Eliminates issues associated with mismatched UIDs with
