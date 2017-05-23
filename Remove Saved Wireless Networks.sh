@@ -1,20 +1,17 @@
 #!/bin/bash
-##################
+#
 # REMOVE SAVED WIRELESS NETWORKS
 # github.com/geoffrepoli
 # v1.1.0
-#################
+# ===
 # Removes SSID(s) from preferred network list & removes saved login credentials from each console user's keychain
 # Note: must be run as root
-
-#################
-#################
+# ===
 
 # SCRIPT CONFIGURATION
 # Add SSIDs to be removed in the following array, using the same formatting as the example networks:
 wirelessNetworks=( "wireless1" "wireless2" "wireless3" )
 
-#################
 #################
 
 # Get list of all local accounts by returning list of all accounts with UID >= 499
