@@ -34,8 +34,13 @@ __validateAuthUserInput() {
 
 __validateUIDInput() {
 	case $1 in
-    ''|*[!0-9]*) echo "Error: UID value must be a number" ; exit 99 ;;
-    *) echo "Using UID value: $uidNumber" ;;
+		''|*[!0-9]*) 
+			echo "Error: UID value must be a number" 
+			exit 99
+			;;
+		*)
+			echo "Using UID value: $uidNumber"
+			;;
 	esac
 }
 
