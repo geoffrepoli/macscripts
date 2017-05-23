@@ -62,14 +62,14 @@ __unbindActiveDirectory() {
 
 __removeMobileAccountPlists() {
 	while IFS= read -r account ; do
-  		rm -f var/db/dslocal/nodes/Default/users/"$account".plist
+  		/bin/rm -f var/db/dslocal/nodes/Default/users/"$account".plist
 	done < <(/usr/bin/dscl . list /users uid | awk -v num="$uidNumber" '$2>=num{print $1}')
 }
 
 __purgeSqlindexCache() {
-	rm -f /var/db/dslocal/nodes/Default/sqlindex
-	rm -f /var/db/dslocal/nodes/Default/sqlindex-shm
-	rm -f /var/db/dslocal/nodes/Default/sqlindex-wal
+	/bin/rm -f /var/db/dslocal/nodes/Default/sqlindex
+	/bin/rm -f /var/db/dslocal/nodes/Default/sqlindex-shm
+	/bin/rm -f /var/db/dslocal/nodes/Default/sqlindex-wal
 }
 
 _configureRestartTasks() {
@@ -96,15 +96,15 @@ __createLaunchDaemon() {
 	</dict> 
 	</plist>
 	EOT
-	chown root:wheel /Library/LaunchDaemons/"$LAUNCH_DAEMON"
-	chmod 644 /Library/LaunchDaemons/"$LAUNCH_DAEMON"
+	/usr/sbin/chown root:wheel /Library/LaunchDaemons/"$LAUNCH_DAEMON"
+	/bin/chmod 644 /Library/LaunchDaemons/"$LAUNCH_DAEMON"
 }
 
 __createLaunchScript() {
-	mkdir ${SCRIPT_PATH%/*}
+	/bin/mkdir ${SCRIPT_PATH%/*}
 	cat <<-EOT > "$SCRIPT_PATH"
 	#!/bin/bash
-	sleep 2
+	/bin/sleep 2
 	## DIRECTORY BINDING SCRIPT SHOULD GO HERE
 	## OR A JAMF POLICY -TRIGGER BIND COMMAND
 	for userHome in /Users/* ; do
@@ -113,12 +113,12 @@ __createLaunchScript() {
 			chown -R "$userUID" "$userHome"
 		fi
 	done
-	rm -f /Library/LaunchDaemons/${LAUNCH_DAEMON}
-	rm -fdr ${SCRIPT_PATH%/*}
+	/bin/rm -f /Library/LaunchDaemons/${LAUNCH_DAEMON}
+	/bin/rm -fdr ${SCRIPT_PATH%/*}
 	exit 0
 	EOT
-	chown root:admin "$SCRIPT_PATH"
-	chmod 755 "$SCRIPT_PATH"
+	/usr/sbin/chown root:admin "$SCRIPT_PATH"
+	/bin/chmod 755 "$SCRIPT_PATH"
 }
 
 _validateData
