@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # ADOBE FLASH PLAYER SILENT INSTALLER
 # github.com/geoffrepoli
