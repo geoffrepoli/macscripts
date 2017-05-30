@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# REMOVE SAVED WIRELESS NETWORKS
+# REMOVE SAVED WPA2 ENTERPRISE WIRELESS NETWORKS
 # github.com/geoffrepoli
 # v1.1.0
 # ===
