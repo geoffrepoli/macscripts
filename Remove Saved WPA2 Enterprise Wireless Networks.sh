@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # REMOVE SAVED WPA2 ENTERPRISE WIRELESS NETWORKS
 # github.com/geoffrepoli
