@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # AD-TO-OD MOBILE ACCOUNT MIGRATION
 # github.com/geoffrepoli
