@@ -2,7 +2,7 @@
 #
 # ADOBE FLASH PLAYER SILENT INSTALLER
 # github.com/geoffrepoli
-# v2.2
+# v2.3
 #################
 # Finds latest version of Adobe Flash Player, downloads and install silently. 
 # Cleans up install files before exiting.
@@ -41,4 +41,4 @@ echo "Cleaning up temporary files..."
 hdiutil detach "$mountPoint" >/dev/null
 rm -rf /private/tmp/"$uuid"*
 
-echo DoneA
+echo Done
