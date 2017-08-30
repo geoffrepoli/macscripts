@@ -1,44 +1,47 @@
 #!/usr/bin/env bash
-#
+set -u
+
 # ADOBE FLASH PLAYER SILENT INSTALLER
-# github.com/geoffrepoli
-# v2.3
-#################
+# github.com/doggles
+# v2.4
+# ----
 # Finds latest version of Adobe Flash Player, downloads and install silently. 
 # Cleans up install files before exiting.
+# ----
 
-## STATIC VARIABLES
+## Constants
 appName="Adobe Flash Player"
 appVersion=$(curl -s "http://fpdownload2.macromedia.com/get/flashplayer/update/current/xml/version_en_mac_pl.xml" | awk -F\" '/v.*=/{gsub(/,/,".");print $2}')
 appURL="https://fpdownload.adobe.com/get/flashplayer/pdc/$appVersion/install_flash_player_osx.dmg"
-uuid=$(uuidgen)
 dmgPath="/private/tmp/${uuid}_${appName//\ /_}.dmg"
 
-## DOWNLOAD
+# Generate UUID to reduce risk of unintended file deletion
+uuid=$(uuidgen)
+
+# Download dmg
 echo "Downloading $appName v$appVersion..."
 curl -s "$appURL" -o "$dmgPath"
 
-## INSTALLATION
-echo "Installing $appName..."
-
-# Create a temp dir to mount disk image at
+# Create a temp dir to mount disk image
+echo "Creating mountpoint"
 mountPoint=$(mktemp -d /private/tmp/${uuid}_${appName//\ /_}_MOUNT.XXXX)
 
-# Mount disk image silently
+# Mount disk image
+echo "Mounting $appName"
 hdiutil attach "$dmgPath" -mountpoint "$mountPoint" -nobrowse -noverify -noautoopen >/dev/null
 
 # Get path to installer pkg within mounted disk image
 appInstaller=$(find "$mountPoint" -type f -name "*Flash*.pkg")
 
-# install silently, redirect stderr to /dev/null to avoid jamf bug that reports the policy as failed
-# when it see the word "error" in the output, even if the error message is unrelated/minor
+# Install silently, redirect stderr to /dev/null to avoid jamf bug that reports the policy as failed
+# when it see the word "error" in the output, regardless of context (e.g., an app named 'Error Reporting')
+echo "Installing $appName"
 installer -dumplog -pkg "$appInstaller" -target / 2>/dev/null
 
-## CLEANUP
+## Cleanup temp files
 echo "Cleaning up temporary files..."
-
-# Unmount disk image, delete tempdir and dmg
 hdiutil detach "$mountPoint" >/dev/null
-rm -rf /private/tmp/"$uuid"*
+rm -rf /private/tmp/"${uuid:?}"*
 
-echo Done
+echo "Done"
+exit
