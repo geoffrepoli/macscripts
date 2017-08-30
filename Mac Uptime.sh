@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
 # MAC UPTIME
-# github.com/geoffrepoli
+# github.com/doggles
 #
-# to use as a replacement for `uptime`
+# Replacement for `uptime` command:
 # 1. `uptime` command in macOS seems to be broken in 10.12.x, often incorrect total uptime
 # 2. `uptime` stdout was not written with text extraction in mind
 # This script uses the `kern.boottime` oid to pull the unix timestamp created at boot.
