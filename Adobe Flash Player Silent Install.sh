@@ -28,7 +28,7 @@ mountPoint=$(mktemp -d /private/tmp/${uuid}_${appName//\ /_}_MOUNT.XXXX)
 
 # Mount disk image
 echo "Mounting $appName"
-hdiutil attach "$dmgPath" -mountpoint "$mountPoint" -nobrowse -noverify -noautoopen >/dev/null
+hdiutil attach "$dmgPath" -mountpoint "$mountPoint" -nobrowse -noverify -noautoopen > /dev/null
 
 # Get path to installer pkg within mounted disk image
 appInstaller=$(find "$mountPoint" -type f -name "*Flash*.pkg")
@@ -36,11 +36,11 @@ appInstaller=$(find "$mountPoint" -type f -name "*Flash*.pkg")
 # Install silently, redirect stderr to /dev/null to avoid jamf bug that reports the policy as failed
 # when it see the word "error" in the output, regardless of context (e.g., an app named 'Error Reporting')
 echo "Installing $appName"
-installer -dumplog -pkg "$appInstaller" -target / 2>/dev/null
+installer -dumplog -pkg "$appInstaller" -target / &> /dev/null
 
 ## Cleanup temp files
 echo "Cleaning up temporary files..."
-hdiutil detach "$mountPoint" >/dev/null
+hdiutil detach "$mountPoint" > /dev/null
 rm -rf /private/tmp/"${uuid:?}"*
 
 echo "Done"
