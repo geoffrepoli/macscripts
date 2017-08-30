@@ -10,12 +10,12 @@ set -u
 # ----
 
 ## Constants
-APP_NAME="Adobe Flash Player"
-XML_URL="http://fpdownload2.macromedia.com/get/flashplayer/update/current/xml/version_en_mac_pl.xml"
+APP_NAME='Adobe Flash Player'
+XML_URL='http://fpdownload2.macromedia.com/get/flashplayer/update/current/xml/version_en_mac_pl.xml'
 UUID=$(uuidgen)
 
 ## Variables
-app_vers=$(curl -s "$XML_URL" | awk -F\" '/v.*=/{gsub(/,/,".");print $2}')
+app_vers=$(curl -s $XML_URL | awk -F\" '/v.*=/{gsub(/,/,".");print $2}')
 app_url="https://fpdownload.adobe.com/get/flashplayer/pdc/${app_vers}/install_flash_player_osx.dmg"
 dmg_path="/private/tmp/${UUID}_${APP_NAME//\ /_}.dmg"
 
@@ -42,7 +42,7 @@ installer -dumplog -pkg "$app_installer" -target / &>/dev/null
 ## Cleanup temp files
 echo "Cleaning up temporary files..."
 hdiutil detach "$mount_point" >/dev/null
-rm -rf /private/tmp/"${UUID:?}"*
+rm -rf /private/tmp/${UUID:?}*
 
 echo "Done"
 exit
