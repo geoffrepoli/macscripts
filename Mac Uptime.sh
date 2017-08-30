@@ -15,10 +15,10 @@ convertSeconds()
   local hrs=$(($1/60/60%24))
   local min=$(($1/60%60))
   local sec=$(($1%60))
-  [[ $day -gt 0 ]] && printf '%dd ' $day
-  [[ $hrs -gt 0 ]] && printf '%dh ' $hrs
-  [[ $min -gt 0 ]] && printf '%dm ' $min
-  [[ $day -gt 0 || $hrs -gt 0 || $min -gt 0 ]] && printf '%ds\n' $sec
+  [ $day -gt 0 ] && printf '%dd ' $day
+  [ $hrs -gt 0 ] && printf '%dh ' $hrs
+  [ $min -gt 0 ] && printf '%dm ' $min
+  [ $day -gt 0 -o $hrs -gt 0 -o $min -gt 0 ] && printf '%ds\n' $sec
 }
 
 # get system boot timestamp
