@@ -11,14 +11,15 @@
 
 convertSeconds()
 {
-  local day=$(($1/60/60/24))
-  local hrs=$(($1/60/60%24))
-  local min=$(($1/60%60))
-  local sec=$(($1%60))
-  [ $day -gt 0 ] && printf '%dd ' $day
-  [ $hrs -gt 0 ] && printf '%dh ' $hrs
-  [ $min -gt 0 ] && printf '%dm ' $min
-  [ $day -gt 0 ] || [ $hrs -gt 0 ] || [ $min -gt 0 ] && printf '%ds\n' $sec
+  local T=$1
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  [ $D -gt 0 ] && printf '%dd ' $D
+  [ $H -gt 0 ] && printf '%dh ' $H
+  [ $M -gt 0 ] && printf '%dm ' $M
+  [ $D -gt 0 ] || [ $H -gt 0 ] || [ $M -gt 0 ] && printf '%ds\n' $S
 }
 
 # get system boot timestamp
