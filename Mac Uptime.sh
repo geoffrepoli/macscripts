@@ -29,7 +29,4 @@ boot=$(sysctl -n kern.boottime | awk '{print $4-0}')
 epoch=$(date +%s)
 
 # get difference of boot and epoch and convert to days/hrs/mins/secs
-uptime=$(convertSeconds $(( epoch - boot )))
-
-# echo result as jamf pro extension attribute
-echo "<result>$uptime</result>"
+convertSeconds $(( epoch - boot )))
