@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # MAC UPTIME
-# github.com/doggles
+# github.com/geoffrepoli
 #
 # Replacement for `uptime` command:
 # 1. `uptime` command in macOS seems to be broken in 10.12.x, often incorrect total uptime

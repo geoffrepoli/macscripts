@@ -2,7 +2,7 @@
 #
 # ----
 # REMOVE SAVED WPA2 ENTERPRISE WIRELESS NETWORKS
-# v2.1 | github.com/doggles
+# v2.2 | github.com/geoffrepoli
 # ----
 # Removes SSID(s) from preferred network list & removes saved login credentials from each console user's keychain
 # Note: must be run as root

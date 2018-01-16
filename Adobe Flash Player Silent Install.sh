@@ -2,8 +2,8 @@
 set -u
 
 # ADOBE FLASH PLAYER SILENT INSTALLER
-# github.com/doggles
-# v2.4
+# github.com/geoffrepoli
+# v2.5
 # ----
 # Finds latest version of Adobe Flash Player, downloads and install silently. 
 # Cleans up install files before exiting.
