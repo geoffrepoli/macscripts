@@ -2,8 +2,8 @@
 set -u
 
 # GOOGLE CHROME LATEST VERSION SILENT INSTALLER
-# github.com/doggles
-# v1.0
+# github.com/geoffrepoli
+# v1.1
 # ----
 # Finds latest version of Google Chrome, downloads and install silently. 
 # Cleans up install files before exiting.
