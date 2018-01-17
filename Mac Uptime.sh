@@ -29,4 +29,4 @@ boot=$(sysctl -n kern.boottime | awk '{print $4-0}')
 epoch=$(date +%s)
 
 # get difference of boot and epoch and convert to days/hrs/mins/secs
-convertSeconds $(( epoch - boot )))
+convertSeconds $(( epoch - boot ))
